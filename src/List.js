@@ -21,22 +21,18 @@ class List extends Component {
 
 
   handleExpandClick = (val) => {
-    // console.log("coming here all the timekjhweidc :: ", val)
     this.setState({ expanded: val })
   }
 
   handleStyleCondition = (styleCon,index) => {
-    // console.log("coming here all the timekjhweidc :: ", val)
     this.setState({ styleCondition: styleCon, activeIndex: index })
   }
 
   handleEntertitle = evt => {
-    console.log("came here to  tiele.. .")
     this.setState({ newList: evt.currentTarget.textContent });
   };
 
   handleEnterDescription = evt => {
-    console.log("came here to desc ")
     this.setState({ newDescription: evt.currentTarget.textContent });
   };
 
@@ -125,10 +121,8 @@ class List extends Component {
   handleOnDrop = (e, status) => {
     let id = e.dataTransfer.getData("id")
     let list = this.props.cardsMain.filter((task) => {    
-      console.log("task:: ", task)
       if (task.id == id) {
         task.postId = status
-        console.log("task after:: ", task)
         this.handleEditItem(task.id, { postId: status })
       }
       return task
@@ -136,7 +130,6 @@ class List extends Component {
   }
 
   handleEditCard = (id, data) => {
-    console.log("data:: ", data)
     let list = this.props.cardsMain.filter((task) => {
       if (task.id == id) {
         task.body = data.body;
@@ -145,8 +138,6 @@ class List extends Component {
       }
       return task
     });
-    // this.setState({ cards: list })
-
   }
 
 
@@ -170,8 +161,6 @@ class List extends Component {
   
   render() {
     let { expanded,styleCondition, newList, newDescription } = this.state;
-    console.log("newList:: ", newList);
-    console.log("newDescription:: ",newDescription)
     return (
       <div id="board" draggable="true" className={styles.board}
         onDragOver={(e) => this.handleDragOver(e)}
@@ -192,21 +181,17 @@ class List extends Component {
               <div id="item" className={styles.item}>
                 <div id="item-name" className={styles.itemName} 
                 onInput={this.handleEntertitle}
-                contentEditable="true">
+                contentEditable="true"
+                suppressContentEditableWarning={true}
+                >
                   {this.props.cards[b].body}
                 </div>
-
-{/* <div id="item-container" className={styles.itemContainer} >
-<p >
-                abcjdbaijdbladsf;aodnfaldknbf;oadfabcjdbaijdbladsf;aodnfaldknbf;oadfabcjdbaijdbladsf;aodnfaldknbf;oadfabcjdbaijdbladsf;aodnfaldknbf;oadf
-                </p>
-  </div> */}
                 
                 <div id="item-container"  contentEditable="true"
+                suppressContentEditableWarning={true}
                 onInput={this.handleEnterDescription}
                 className={((this.props.cards[b].id === this.state.activeIndex) && styleCondition) ? styles.itemContainerEnlarge : styles.itemContainer} 
                 // style={ index === this.state.activeIndex ? { backgroundColor: this.state.bgColor } : null}
-                // onClick={this.setState({styleCondition: true})}
                 onClick={() => this.handleStyleCondition(!styleCondition,this.props.cards[b].id )}
                 >
                   {this.props.cards[b].description}

@@ -23,22 +23,17 @@ class App extends Component {
   };
 
   handleSearchQuery = evt => {
-    console.log("entered into search :: ", evt.target.value)
     this.setState({ searchQuery: evt.target.value });
   };
   handleExpandList = (val) => {
-    console.log("coming here all the timekjhweidc :: ", val)
     this.setState({ expandList: val })
   }
 
-  handleCards = (val)=>{
-    console.log("entered into handle cards")
-    this.setState({cards : val, cardsMain: val})
+  handleCards = (val) => {
+    this.setState({ cards: val, cardsMain: val })
   }
-  handleLists = (val)=>{
-    console.log("entered into handle lists");
-    console.log("val:: ", val)
-    this.setState({lists : val})
+  handleLists = (val) => {
+    this.setState({ lists: val })
   }
   async componentWillMount() {
     await this.getLists('http://localhost:3000/posts/');
@@ -67,7 +62,6 @@ class App extends Component {
           })
         }
         // if(query.indexOf("comments")){
-        //   console.log("entered in to comments")
         //   this.setState({ cards: responseJson
         //   })
         // }
@@ -83,13 +77,11 @@ class App extends Component {
       .then(response => response.json())
       .then((responseJson) => {
         if (query.indexOf("posts")) {
-          console.log("entered in to posts")
           this.setState({
             lists: responseJson,
           })
         }
         // if(query.indexOf("comments")){
-        //   console.log("entered in to comments")
         //   this.setState({ cards: responseJson
         //   })
         // }
@@ -141,13 +133,12 @@ class App extends Component {
 
         <div id="app" className={styles.App}>
           {Object.keys(lists).map(b => (
-
-            <List cardsMain={cardsMain} 
-            list={lists[b]} cards={cards.filter(x => x.postId === lists[b].id).map(x => x)} 
-            id={lists[b].id} 
-            lists = {lists}
-            handleCards = {this.handleCards}
-            handleLists = {this.handleLists}
+            <List cardsMain={cardsMain}
+              list={lists[b]} cards={cards.filter(x => x.postId === lists[b].id).map(x => x)}
+              id={lists[b].id}
+              lists={lists}
+              handleCards={this.handleCards}
+              handleLists={this.handleLists}
             />
           ))}
 
@@ -160,9 +151,9 @@ class App extends Component {
             </button>
                 : <AddListAfter buttonData="Add List"
                   handleExpandList={this.handleExpandList}
-                  expandList={expandList} lists={lists} 
-                  handleLists = {this.handleLists}
-                  />
+                  expandList={expandList} lists={lists}
+                  handleLists={this.handleLists}
+                />
             }
           </div>
         </div>
