@@ -91,15 +91,21 @@
             }
 
             .itemContainer{
+                font-size: 14px;
+                white-space: normal;
+                word-break: break-all;
                 padding: 10px;
                 border-bottom: 1px solid #dbdbdb;
 
             }
-
+            
             .itemContainerEnlarge{
+                font-size: 14px;
+                white-space: normal;
+                word-break: break-all;
                 padding: 10px;
                 border-bottom: 1px solid #dbdbdb;
-                height: 40px
+                height: 140px
             }
             .itemPerformers{
                 padding: 5px 10px;

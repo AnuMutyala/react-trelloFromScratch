@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styles from './addCardAfter.module.scss';
 
-class AddListAfter extends Component {
+class AddCardAfter extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -28,13 +28,19 @@ class AddListAfter extends Component {
                 'Access-Control-Allow-Origin': '*'
             },
                 body: JSON.stringify(data)
-          }).then(function(response) {
-                  if(response.status === 200){alert(`Registered successfully`)}
-                  else{alert(`Please check there is some error`)}
-                });
+          })
+          .then(r => r.json()).then(data => {
+            let val = this.props.cardsMain;
+            val.push(data)
+            this.handleCards(val);
+            this.handleClose();
+          });
   }
 
     else{alert(`Card with same title already exists`)}
+}
+handleCards= (data) => {
+  this.props.handleCards(data);
 }
   handleExpandClick = () => {
     let expanded = this.state.expanded;
@@ -87,4 +93,4 @@ class AddListAfter extends Component {
     )
   }
 }
-export default AddListAfter
+export default AddCardAfter

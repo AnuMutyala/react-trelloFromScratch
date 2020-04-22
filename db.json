@@ -1,137 +1,44 @@
 {
   "posts": [
     {
-      "id": 1,
-      "title": "To Do",
-      "author": "anu"
+      "title": "doing1",
+      "id": 1
     },
     {
-      "id": 2,
-      "title": "Doing",
-      "author": "anu"
+      "title": "doing2",
+      "id": 2
     },
     {
-      "id": 3,
-      "title": "Done",
-      "author": "anu"
+      "title": "fa",
+      "id": 3
     },
     {
-      "title": "wat",
+      "title": "fa2",
       "id": 4
     },
     {
-      "title": "warw",
+      "title": "we2",
       "id": 5
-    },
-    {
-      "title": "fads",
-      "id": 6
-    },
-    {
-      "title": "hyr",
-      "id": 7
-    },
-    {
-      "title": "vahreh",
-      "id": 8
     }
   ],
   "comments": [
     {
-      "id": 1,
-      "body": "edited this",
-      "description": "content for data",
-      "postId": 3
+      "body": "edited",
+      "description": "dfsdaf",
+      "postId": 3,
+      "id": 2
     },
     {
-      "id": 2,
-      "body": "some comment2",
-      "description": "content for data",
-      "postId": 2
-    },
-    {
-      "id": 3,
-      "body": "some comment3",
-      "description": "content for data",
-      "postId": 1
-    },
-    {
-      "body": "fdadshfuajkgyuhijokldsjhgfauiodlfkaigldfha",
-      "description": "content for data",
-      "postId": 1,
-      "id": 5
-    },
-    {
-      "body": "fadsfa",
-      "Description": "content for data",
-      "postId": 1,
-      "id": 6
-    },
-    {
-      "body": "fadsfa",
-      "Description": "content for data",
-      "postId": 1,
-      "id": 7
-    },
-    {
-      "body": "fadsfa",
-      "Description": "content for data",
-      "postId": 1,
-      "id": 8
-    },
-    {
-      "body": "fadsfa",
-      "Description": "content for data",
-      "postId": 1,
-      "id": 9
-    },
-    {
-      "body": "fadsfa",
-      "Description": "content for data",
-      "postId": 1,
-      "id": 10
-    },
-    {
-      "body": "fadsfa",
-      "Description": "content for data",
-      "postId": 1,
-      "id": 11
+      "body": "hkdjshfaihdhkdjshfaihdhkdjshfaihdhkdjshfaihdhkdjshfaihdhkdjshfaihdhkdjshfaihdhkdjshfaihdhkdjshfaihd",
+      "description": "fasdfasdfahkdjshfaihdhkdjshfaihdhkdjshfaihdhkdjshfaihdhkdjshfaihdhkdjshfaihdhkdjshfaihdhkdjshfaihdhk",
+      "postId": 3,
+      "id": 3
     },
     {
       "body": "edited",
-      "description": "ddfasdfafaddfasdfafaddfasdfafaddfasdfafaddfasdfafaddfasdfafaddfasdfafaddfasdfafaddfasdfafaddfasdfafaddfasdfafaddfasdfafaddfasdfafaddfasdfafaddfasdfafaddfasdfafaddfasdfafaddfasdfafaddfasdfafaddfasdfafaddfasdfafaddfasdfafaddfasdfafaddfasdfafaddfasdfafaddfasdfafaddfasdfafaddfasdfafaddfasdfafaddfasdfafa",
-      "postId": 3,
-      "id": 14
-    },
-    {
-      "body": "edited",
-      "description": "dsa",
-      "postId": 3,
-      "id": 15
-    },
-    {
-      "body": "fa",
       "description": "",
-      "postId": 3,
-      "id": 16
-    },
-    {
-      "body": "fa",
-      "description": "",
-      "postId": 3,
-      "id": 17
-    },
-    {
-      "body": "fa",
-      "description": "",
-      "postId": 3,
-      "id": 18
-    },
-    {
-      "body": "bag2",
-      "description": "",
-      "postId": 10,
-      "id": 19
+      "postId": 2,
+      "id": 4
     }
   ],
   "profile": {

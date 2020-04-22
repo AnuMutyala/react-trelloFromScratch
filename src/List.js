@@ -10,7 +10,8 @@ class List extends Component {
       lists: [{}],
       expanded: false,
       editCard: "",
-      styleCondition: false
+      styleCondition: false,
+      activeIndex:null
     };
     this.handleRemoveItem = this.handleRemoveItem.bind(this);
     this.handleEditItem = this.handleEditItem.bind(this);
@@ -22,9 +23,9 @@ class List extends Component {
     this.setState({ expanded: val })
   }
 
-  handleStyleCondition = (val) => {
+  handleStyleCondition = (styleCon,index) => {
     // console.log("coming here all the timekjhweidc :: ", val)
-    this.setState({ styleCondition: val })
+    this.setState({ styleCondition: styleCon, activeIndex: index })
   }
 
 
@@ -53,10 +54,21 @@ class List extends Component {
         "Content-Type": "application/json",
         'Access-Control-Allow-Origin': '*'
       },
-    }).then(function (response) {
-      // if(response.status === 200){alert(`Registered successfully`)}
-      // else{alert(`Please check there is some error`)}
+    })
+    
+    .then(r => r.json()).then(data => {
+      let val = this.props.cardsMain || [];
+      const result = val.filter(list => list.id != id);
+      this.handleCards(result);
     });
+  }
+
+  handleCards= (data) => {
+    
+    this.props.handleCards(data);
+  }
+  handleLists= (data) => {
+    this.props.handleLists(data);
   }
 
   handleRemoveList = async (id) => {
@@ -67,10 +79,12 @@ class List extends Component {
         "Content-Type": "application/json",
         'Access-Control-Allow-Origin': '*'
       },
-    }).then(function (response) {
-      console.log("response :: ", response)
-      // if(response.status === 200){alert(`Registered successfully`)}
-      // else{alert(`Please check there is some error`)}
+    })
+    .then(r => r.json()).then(data => {
+      let val = this.props.lists || [];
+      const result = val.filter(list => list.id != id);
+      this.handleLists(result);
+      this.handleCards(this.props.cardsMain);
     });
   }
 
@@ -83,10 +97,10 @@ class List extends Component {
         'Access-Control-Allow-Origin': '*'
       },
       body: JSON.stringify(data)
-    }).then(function (response) {
-      console.log("response :: ", response)
-      // if(response.status === 200){alert(`Registered successfully`)}
-      // else{alert(`Please check there is some error`)}
+    })
+    .then(r => r.json()).then(data => {
+      let val = this.props.cardsMain;
+      this.handleCards(val);
     });
   }
   handleDragStart = (e, name) => {
@@ -99,21 +113,34 @@ class List extends Component {
   }
   handleOnDrop = (e, status) => {
     let id = e.dataTransfer.getData("id")
-    console.log("listId after dragging:: ", status)
-    let list = this.props.cardsMain.filter((task) => {
+    let list = this.props.cardsMain.filter((task) => {    
       console.log("task:: ", task)
-      if (task.body === id) {
+      if (task.id == id) {
         task.postId = status
         console.log("task after:: ", task)
         this.handleEditItem(task.id, { postId: status })
       }
       return task
     });
-    console.log("list:: ", list)
+  }
+
+  handleEditCard = (id, data) => {
+    let list = this.props.cardsMain.filter((task) => {
+      if (task.id == id) {
+        task.body = data.body;
+        task.description = data.description;
+        this.handleEditItem(task.id, { body: data.body,description: data.description })
+      }
+      return task
+    });
     // this.setState({ cards: list })
 
   }
 
+  handleLists= (data) => {
+    this.props.handleLists(data);
+  }
+  
   render() {
     let { expanded,styleCondition } = this.state
     return (
@@ -131,7 +158,7 @@ class List extends Component {
         <div id="listItems" key={this.props.list.id} className={styles.listItems}>
           {Object.keys(this.props.cards).map(b => (
             <div
-              onDragStart={(e) => { this.handleDragStart(e, this.props.cards[b].body) }}
+              onDragStart={(e) => { this.handleDragStart(e, this.props.cards[b].id) }}
               draggable="true" key={b}>
               <div id="item" className={styles.item}>
                 <div id="item-name" className={styles.itemName}>
@@ -144,14 +171,14 @@ class List extends Component {
                 </p>
   </div> */}
                 
-                <p id="item-container" 
-                className={styleCondition ? styles.itemContainerEnlarge : styles.itemContainer} 
+                <div id="item-container" 
+                className={((this.props.cards[b].id === this.state.activeIndex) && styleCondition) ? styles.itemContainerEnlarge : styles.itemContainer} 
+                // style={ index === this.state.activeIndex ? { backgroundColor: this.state.bgColor } : null}
                 // onClick={this.setState({styleCondition: true})}
-                onClick={() => this.handleStyleCondition(!styleCondition)}
-                // className={styles.itemContainer} 
+                onClick={() => this.handleStyleCondition(!styleCondition,this.props.cards[b].id )}
                 >
                   {this.props.cards[b].description}
-                </p>
+                </div>
 
                 <div id="item-performers" className={styles.itemPerformers}>
                   <button id="delete" className={styles.delete} onClick={() => this.handleRemoveItem(this.props.cards[b].id)}>
@@ -159,7 +186,7 @@ class List extends Component {
                   </button>
 
                   <button id="edit" className={styles.delete} >
-                    <img src="edit.png" alt="Edit perfomers" height="10px" onClick={() => this.handleEditItem(this.props.cards[b].id, { "body": "edited" })}></img>
+                    <img src="edit.png" alt="Edit perfomers" height="10px" onClick={() => this.handleEditCard(this.props.cards[b].id, { "body": "edited" })}></img>
                   </button>
                 </div>
 
@@ -180,7 +207,9 @@ class List extends Component {
                   handleExpandClick={this.handleExpandClick}
                   ListId={this.props.list.id}
                   cardsMain={this.props.cardsMain}
-                  expanded={expanded} />
+                  expanded={expanded} 
+            handleCards = {this.handleCards}
+            handleLists = {this.handleLists}/>
             }
           </div>
         </div>

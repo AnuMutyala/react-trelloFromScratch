@@ -142,7 +142,13 @@ class App extends Component {
         <div id="app" className={styles.App}>
           {Object.keys(lists).map(b => (
 
-            <List cardsMain={cardsMain} list={lists[b]} cards={cards.filter(x => x.postId === lists[b].id).map(x => x)} id={lists[b].id} />
+            <List cardsMain={cardsMain} 
+            list={lists[b]} cards={cards.filter(x => x.postId === lists[b].id).map(x => x)} 
+            id={lists[b].id} 
+            lists = {lists}
+            handleCards = {this.handleCards}
+            handleLists = {this.handleLists}
+            />
           ))}
 
           <div id="board" className={styles.board}>
