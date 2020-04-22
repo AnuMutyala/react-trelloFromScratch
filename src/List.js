@@ -11,7 +11,9 @@ class List extends Component {
       expanded: false,
       editCard: "",
       styleCondition: false,
-      activeIndex:null
+      activeIndex:null,
+      newList:"",
+      newDescription:""
     };
     this.handleRemoveItem = this.handleRemoveItem.bind(this);
     this.handleEditItem = this.handleEditItem.bind(this);
@@ -28,6 +30,15 @@ class List extends Component {
     this.setState({ styleCondition: styleCon, activeIndex: index })
   }
 
+  handleEntertitle = evt => {
+    console.log("came here to  tiele.. .")
+    this.setState({ newList: evt.currentTarget.textContent });
+  };
+
+  handleEnterDescription = evt => {
+    console.log("came here to desc ")
+    this.setState({ newDescription: evt.currentTarget.textContent });
+  };
 
   async getCards(query) {
     await fetch(query)
@@ -47,7 +58,7 @@ class List extends Component {
   }
 
   handleRemoveItem = async (id) => {
-    await fetch('https://my-json-server.typicode.com/AnuMutyala/fakeData1/comments/' + id, {
+    await fetch('http://localhost:3000/comments/' + id, {
       method: 'DELETE',
       headers: {
         Accept: "application/json",
@@ -72,7 +83,7 @@ class List extends Component {
   }
 
   handleRemoveList = async (id) => {
-    await fetch('https://my-json-server.typicode.com/AnuMutyala/fakeData1/posts/' + id, {
+    await fetch('http://localhost:3000/posts/' + id, {
       method: 'DELETE',
       headers: {
         Accept: "application/json",
@@ -89,7 +100,7 @@ class List extends Component {
   }
 
   handleEditItem = async (id, data) => {
-    await fetch('https://my-json-server.typicode.com/AnuMutyala/fakeData1/comments/' + id, {
+    await fetch('http://localhost:3000/comments/' + id, {
       method: 'PATCH',
       headers: {
         Accept: "application/json",
@@ -125,6 +136,7 @@ class List extends Component {
   }
 
   handleEditCard = (id, data) => {
+    console.log("data:: ", data)
     let list = this.props.cardsMain.filter((task) => {
       if (task.id == id) {
         task.body = data.body;
@@ -137,12 +149,29 @@ class List extends Component {
 
   }
 
+
+  // handleEditCard = (id, data) => {
+
+  //   let list = this.props.cardsMain.filter((task) => {
+  //     if (task.id == id) {
+  //       task.body = data.body;
+  //       task.description = data.description;
+  //       this.handleEditItem(task.id, { body: data.body,description: data.description })
+  //     }
+  //     return task
+  //   });
+  //   // this.setState({ cards: list })
+
+  // }
+
   handleLists= (data) => {
     this.props.handleLists(data);
   }
   
   render() {
-    let { expanded,styleCondition } = this.state
+    let { expanded,styleCondition, newList, newDescription } = this.state;
+    console.log("newList:: ", newList);
+    console.log("newDescription:: ",newDescription)
     return (
       <div id="board" draggable="true" className={styles.board}
         onDragOver={(e) => this.handleDragOver(e)}
@@ -161,7 +190,9 @@ class List extends Component {
               onDragStart={(e) => { this.handleDragStart(e, this.props.cards[b].id) }}
               draggable="true" key={b}>
               <div id="item" className={styles.item}>
-                <div id="item-name" className={styles.itemName}>
+                <div id="item-name" className={styles.itemName} 
+                onInput={this.handleEntertitle}
+                contentEditable="true">
                   {this.props.cards[b].body}
                 </div>
 
@@ -171,7 +202,8 @@ class List extends Component {
                 </p>
   </div> */}
                 
-                <div id="item-container" 
+                <div id="item-container"  contentEditable="true"
+                onInput={this.handleEnterDescription}
                 className={((this.props.cards[b].id === this.state.activeIndex) && styleCondition) ? styles.itemContainerEnlarge : styles.itemContainer} 
                 // style={ index === this.state.activeIndex ? { backgroundColor: this.state.bgColor } : null}
                 // onClick={this.setState({styleCondition: true})}
@@ -186,7 +218,7 @@ class List extends Component {
                   </button>
 
                   <button id="edit" className={styles.delete} >
-                    <img src="edit.png" alt="Edit perfomers" height="10px" onClick={() => this.handleEditCard(this.props.cards[b].id, { "body": "edited" })}></img>
+                    <img src="edit.png" alt="Edit perfomers" height="10px" onClick={() => this.handleEditCard(this.props.cards[b].id, { "body": newList, description: newDescription })}></img>
                   </button>
                 </div>
 

@@ -19,7 +19,7 @@ class AddCardAfter extends Component {
     "description": this.state.newDescription,
     postId:listId
   }
-    await fetch('https://my-json-server.typicode.com/AnuMutyala/fakeData1/comments/'
+    await fetch('http://localhost:3000/comments/'
     , {
             method: 'post',
             headers: {

@@ -18,7 +18,7 @@ class AddListAfter extends Component {
     let data = {
       "title": this.state.newList
   }
-    await fetch('https://my-json-server.typicode.com/AnuMutyala/fakeData1/posts/'
+    await fetch('http://localhost:3000/posts/'
     , {
             method: 'post',
             headers: {
