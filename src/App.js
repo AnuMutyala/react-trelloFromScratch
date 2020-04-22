@@ -8,9 +8,9 @@ class App extends Component {
     super(props);
 
     this.state = {
-      lists: [{}],
-      cards: [{}],
-      cardsMain: [{}],
+      lists: [{id:null,title:null}],
+      cards: [{id:null,body:null,description: null}],
+      cardsMain: [{id:null,body:null,description: null,postId: null}],
       profile: "",
       searchQuery: "",
       expandList: false
@@ -121,8 +121,12 @@ class App extends Component {
     } = this.state;
     return (
       <div>
+        <div 
+        className= {styles.profile}
+        >
+        <input className= {styles.names}  maxlength="512" value= {profile}></input>
         <div className={styles.search}>
-          <input className={styles["button"]}
+          <input className={styles.searchInput}
             type="search" name="list title" maxLength="512"
             placeholder="Search for Cards"
             value={searchQuery}
@@ -130,6 +134,8 @@ class App extends Component {
             onChange={this.handleSearchQuery}
           ></input>
         </div>
+        </div>
+        
 
         <div id="app" className={styles.App}>
           {Object.keys(lists).map(b => (

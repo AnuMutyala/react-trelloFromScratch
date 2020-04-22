@@ -1,37 +1,18 @@
 {
   "posts": [
-    {
-      "title": "doing2",
-      "id": 2
-    },
-    {
-      "title": "fa",
-      "id": 3
-    },
-    {
-      "title": "fa2",
-      "id": 4
-    }
+    { "id": 1, "title": "To Do" },
+    { "id": 2, "title": "Doing" },
+    { "id": 3, "title": "Verify" },
+    { "id": 4, "title": "code clean up" },
+    { "id": 5, "title": "Done" }
   ],
   "comments": [
-    {
-      "body": "hjvklkioilkm",
-      "description": "dwekl.lnkjbkjhv",
-      "postId": 2,
-      "id": 2
-    },
-    {
-      "body": "hkdjshfaihdhkdjshfaihdhkdjshfaihdhkdjshfaihdhkdjshfaihdhkdjshfaihdhkdjshfaihdhkdjshfaihdhkdjshfaihd",
-      "description": "fasdfasdfahkdjshfaihdhkdjshfaihdhkdjshfaihdhkdjshfaihdhkdjshfaihdhkdjshfaihdhkdjshfaihdhkdjshfaihdhk",
-      "postId": 3,
-      "id": 3
-    },
-    {
-      "body": "edited",
-      "description": "",
-      "postId": 2,
-      "id": 4
-    }
+    { "id": 1, "body": "some comment", "description": "random description1 ", "postId": 1 },
+    { "id": 2, "body": "some comment 2", "description": "random description2 ","postId": 1 },
+    { "id": 3, "body": "some comment for search1", "description": "random description3","postId": 1 },
+    { "id": 4, "body": "some comment", "description": "random description1 for 2nd item", "postId": 2 },
+    { "id": 5, "body": "some comment 2", "description": "random description2 ","postId": 2 },
+    { "id": 6, "body": "some comment for search2", "description": "random description3","postId": 4 }
   ],
   "profile": {
     "name": "typicode"

@@ -13,7 +13,8 @@ class List extends Component {
       styleCondition: false,
       activeIndex:null,
       newList:"",
-      newDescription:""
+      newDescription:"",
+      editModeState: false
     };
     this.handleRemoveItem = this.handleRemoveItem.bind(this);
     this.handleEditItem = this.handleEditItem.bind(this);
@@ -29,11 +30,11 @@ class List extends Component {
   }
 
   handleEntertitle = evt => {
-    this.setState({ newList: evt.currentTarget.textContent });
+    this.setState({ newList: evt.currentTarget.textContent, editModeState: true });
   };
 
   handleEnterDescription = evt => {
-    this.setState({ newDescription: evt.currentTarget.textContent });
+    this.setState({ newDescription: evt.currentTarget.textContent, editModeState: true });
   };
 
   async getCards(query) {
@@ -130,14 +131,19 @@ class List extends Component {
   }
 
   handleEditCard = (id, data) => {
-    let list = this.props.cardsMain.filter((task) => {
-      if (task.id == id) {
-        task.body = data.body;
-        task.description = data.description;
-        this.handleEditItem(task.id, { body: data.body,description: data.description })
-      }
-      return task
-    });
+    if(data.body.trim().length>0){
+      let list = this.props.cardsMain.filter((task) => {
+        if (task.id == id) {
+          task.body = data.body;
+          // task.description = data.description;
+          this.handleEditItem(task.id, { description: data.description })
+        }
+        return task
+      });
+    }
+    this.setState({newList:"",
+    newDescription:"", editModeState: false})
+    
   }
 
 
@@ -160,7 +166,7 @@ class List extends Component {
   }
   
   render() {
-    let { expanded,styleCondition, newList, newDescription } = this.state;
+    let { expanded,styleCondition, newList, newDescription,editModeState } = this.state;
     return (
       <div id="board" draggable="true" className={styles.board}
         onDragOver={(e) => this.handleDragOver(e)}
@@ -179,17 +185,16 @@ class List extends Component {
               onDragStart={(e) => { this.handleDragStart(e, this.props.cards[b].id) }}
               draggable="true" key={b}>
               <div id="item" className={styles.item}>
-                <div id="item-name" className={styles.itemName} 
+                <div id="item-name" 
+                className={styles.itemName} 
                 onInput={this.handleEntertitle}
-                contentEditable="true"
+                contentEditable= {true}
                 suppressContentEditableWarning={true}
                 >
                   {this.props.cards[b].body}
                 </div>
                 
-                <div id="item-container"  contentEditable="true"
-                suppressContentEditableWarning={true}
-                onInput={this.handleEnterDescription}
+                <div id="item-container"  
                 className={((this.props.cards[b].id === this.state.activeIndex) && styleCondition) ? styles.itemContainerEnlarge : styles.itemContainer} 
                 // style={ index === this.state.activeIndex ? { backgroundColor: this.state.bgColor } : null}
                 onClick={() => this.handleStyleCondition(!styleCondition,this.props.cards[b].id )}
@@ -202,8 +207,8 @@ class List extends Component {
                     <img src="del.png" alt="Delete perfomers" height="10px" ></img>
                   </button>
 
-                  <button id="edit" className={styles.delete} >
-                    <img src="edit.png" alt="Edit perfomers" height="10px" onClick={() => this.handleEditCard(this.props.cards[b].id, { "body": newList, description: newDescription })}></img>
+                  <button type ="button" id="edit" className={styles.delete} disabled= {true}>
+                    <img src="edit.png" alt="Edit perfomers" height="10px" onClick={() => this.handleEditCard(this.props.cards[b].id, {  body: newList })}></img>
                   </button>
                 </div>
 

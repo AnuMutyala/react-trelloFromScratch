@@ -1,10 +1,29 @@
-.search{
-
-        // max-width: 30%;
-        max-height: 30px;
-        width: 30%;
-        margin: 25px;
+.profile{
+    display: flex;
+    .names{
+        background: none;
+        color: white;
+        font-size: 18px;
+        font-weight: 700;
+        border: none;
+        padding: 0px 0px 0px 20px;
+        width: 100px;
+    }
+    .search{
     
+            // max-width: 30%;
+            max-height: 30px;
+            margin-left: 0px;
+            // width: 30%;
+            margin: 20px 20px 20px 0px;
+            .searchInput{
+                height: 50px;
+                line-height: 50px;
+                font-size: 100px;
+                float: left
+            }
+        
+    }
 }
 .App{
     // display: flex;
