@@ -1,0 +1,26 @@
+
+
+.ribbon {
+  /* // background-color: #5BC8F7; */
+  background-color: red;
+}
+
+.ribbon::before {
+  content: "Look at this orange box.";
+  background-color: #FFBA10;
+  border-color: black;
+  border-style: dotted;
+} 
+
+.button{
+  // width: 100%;
+  padding: 4px;
+  text-align: left !important;
+  border: none;
+  background: none;
+  height: 20px;
+  font-size: 16px;
+  width: 20px;
+  display:flex
+
+}
