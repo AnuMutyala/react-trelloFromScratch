@@ -54,7 +54,7 @@ class List extends Component {
   }
 
   handleRemoveItem = async (id) => {
-    await fetch('http://localhost:3000/comments/' + id, {
+    await fetch('https://my-json-server.typicode.com/AnuMutyala/fakeData1/comments/' + id, {
       method: 'DELETE',
       headers: {
         Accept: "application/json",
@@ -79,7 +79,7 @@ class List extends Component {
   }
 
   handleRemoveList = async (id) => {
-    await fetch('http://localhost:3000/posts/' + id, {
+    await fetch('https://my-json-server.typicode.com/AnuMutyala/fakeData1/posts/' + id, {
       method: 'DELETE',
       headers: {
         Accept: "application/json",
@@ -96,7 +96,7 @@ class List extends Component {
   }
 
   handleEditItem = async (id, data) => {
-    await fetch('http://localhost:3000/comments/' + id, {
+    await fetch('https://my-json-server.typicode.com/AnuMutyala/fakeData1/comments/' + id, {
       method: 'PATCH',
       headers: {
         Accept: "application/json",

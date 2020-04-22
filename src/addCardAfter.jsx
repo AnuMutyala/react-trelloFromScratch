@@ -13,13 +13,16 @@ class AddCardAfter extends Component {
 
   handleAddList = async (listId) => {
     this.setState({ expanded: !this.state.expanded })
-    if (!this.props.cardsMain.some(el => el.body.toLowerCase().trim() === this.state.newList.toLowerCase().trim())) {
+    if(this.state.newList.trim().length <= 0){
+      alert(`Card Title is mandatory`) 
+    }
+    else if (this.state.newList.trim().length > 0 && !this.props.cardsMain.some(el => el.body.toLowerCase().trim() === this.state.newList.toLowerCase().trim())) {
       let data = {
         "body": this.state.newList,
         "description": this.state.newDescription,
         postId: listId
       }
-      await fetch('http://localhost:3000/comments/'
+      await fetch('https://my-json-server.typicode.com/AnuMutyala/fakeData1/comments/'
         , {
           method: 'post',
           headers: {
@@ -42,13 +45,13 @@ class AddCardAfter extends Component {
   handleCards = (data) => {
     this.props.handleCards(data);
   }
-  handleExpandClick = () => {
-    let expanded = this.state.expanded;
+  handleExpandClick = (expanded) => {
     this.props.handleExpandClick(expanded);
   }
   handleClose = () => {
-    this.setState({ expanded: !this.props.expanded })
-    this.handleExpandClick();
+    let val = !this.props.expanded
+    this.setState({ expanded: val })
+    this.handleExpandClick(val);
   }
   handleEntertitle = evt => {
     this.setState({ newList: evt.target.value });
@@ -84,7 +87,7 @@ class AddCardAfter extends Component {
           <button
             // className ={styles["button"]}
             onClick={this.handleClose}
-            onChange={this.handleExpandClick}
+            // onChange={this.handleExpandClick}
           >  &#10005;
             </button>
         </div>

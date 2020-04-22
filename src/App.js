@@ -36,9 +36,9 @@ class App extends Component {
     this.setState({ lists: val })
   }
   async componentWillMount() {
-    await this.getLists('http://localhost:3000/posts/');
-    await this.getCards('http://localhost:3000/comments/');
-    await this.getProfile('http://localhost:3000/profile/')
+    await this.getLists('https://my-json-server.typicode.com/AnuMutyala/fakeData1/posts/');
+    await this.getCards('https://my-json-server.typicode.com/AnuMutyala/fakeData1/comments/');
+    await this.getProfile('https://my-json-server.typicode.com/AnuMutyala/fakeData1/profile/')
   }
 
   async componentDidUpdate(prevProps, prevState) {
@@ -47,7 +47,7 @@ class App extends Component {
       this.setState({ cards: responseJson })
     }
     else if (prevState.searchQuery !== this.state.searchQuery && this.state.searchQuery.trim().length == 0) {
-      await this.getCards('http://localhost:3000/comments/');
+      await this.getCards('https://my-json-server.typicode.com/AnuMutyala/fakeData1/comments/');
       // this.setState({ cards: prevState.cardsMain})
     }
   }

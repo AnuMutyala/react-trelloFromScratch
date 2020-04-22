@@ -13,12 +13,15 @@ class AddListAfter extends Component {
 
 
   handleAddList = async () => {
-    if (!this.props.lists.some(el => el.title.toLowerCase().trim() === this.state.newList.toLowerCase().trim())) {
+    if(this.state.newList.trim().length <= 0){
+      alert(`List Title is mandatory`) 
+    }
+    else if (!this.props.lists.some(el => el.title.toLowerCase().trim() === this.state.newList.toLowerCase().trim())) {
       this.setState({ expandList: !this.state.expandList })
       let data = {
         "title": this.state.newList
       }
-      await fetch('http://localhost:3000/posts/'
+      await fetch('https://my-json-server.typicode.com/AnuMutyala/fakeData1/posts/'
         , {
           method: 'post',
           headers: {
