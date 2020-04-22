@@ -136,7 +136,7 @@ class List extends Component {
         if (task.id == id) {
           task.body = data.body;
           // task.description = data.description;
-          this.handleEditItem(task.id, { description: data.description })
+          this.handleEditItem(task.id, { body: data.body })
         }
         return task
       });
